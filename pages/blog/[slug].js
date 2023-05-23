@@ -3,8 +3,8 @@ import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
 import parse from 'html-react-parser';
-import {ShareSocial} from 'react-share-social';
-import { FacebookShareButton, TwitterShareButton } from 'react-share';
+// import {ShareSocial} from 'react-share-social';
+// import { FacebookShareButton, TwitterShareButton } from 'react-share';
 
 function Post({ blogs,blogcat }) {
   const structuredData = JSON.stringify(blogs); // Convert the meta_image data to JSON string
@@ -52,13 +52,13 @@ function Post({ blogs,blogcat }) {
 
                 </Head>
 
-                <FacebookShareButton url={`https://blognew.dynamicssquare.com/api/blog/category/microsoft-365`} media={item.meta_image} quote={item.title}>
+                {/* <FacebookShareButton url={`https://blognew.dynamicssquare.com/api/blog/category/microsoft-365`} media={item.meta_image} quote={item.title}>
         Share on Facebook
       </FacebookShareButton>
 
       <TwitterShareButton url={`https://blognew.dynamicssquare.com/blog/${item.title_slug}`} media={item.meta_image} quote={item.title}>
         Share on Twitter
-      </TwitterShareButton>
+      </TwitterShareButton> */}
 
                 <div className="blogs-inner-main">
                   <div className="container">
