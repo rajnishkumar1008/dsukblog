@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: 'https://www.dynamicssquare.ca',
+    siteUrl: 'http://localhost:3000/',
     generateRobotsTxt: false,
     sitemapSize: 7000,
   }
