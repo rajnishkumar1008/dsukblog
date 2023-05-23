@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/dynamics-365-business-central-implementation/", "destination": "/dynamics-365-business-central-erp-system-implementation/", "statusCode": 301 },
+    { "source": "/dynamics-365-business-central-support/", "destination": "/dynamics-365-business-central-erp-support/", "statusCode": 301 },
+    { "source": "/products/microsoft-dynamics-365-mixed-reality/", "destination": "/products/microsoft-dynamics-365/mixed-reality/", "statusCode": 301 },
+    { "source": "/products/field-service/", "destination": "/products/microsoft-dynamics-365-field-service/", "statusCode": 301 },
+    { "source": "/products/erp/", "destination": "/products/microsoft-dynamics-erp/", "statusCode": 301 },
+    { "source": "/industries/startup/", "destination": "/industries/startups/", "statusCode": 301 }
+  ]
+}

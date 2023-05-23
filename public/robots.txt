@@ -1,0 +1,9 @@
+User-agent: *
+
+Disallow: /tag/
+Disallow: /category/
+Disallow: /wp-content/
+Disallow: /DSCANADA/
+
+Sitemap: https://www.dynamicssquare.ca/sitemap.xml
+Sitemap: https://blog.dynamicssquare.ca/sitemap_index.xml
