@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 
 export async function getServerSideProps(){
-  const res=await fetch(`${process.env.API_BASE_URL}/api/allblog`)
+ const res=await fetch(`${process.env.API_BASE_URL}/api/allblog`)
   const blogs = await res.json()
   return { props: { blogs }}
 }
