@@ -97,21 +97,21 @@ function Post({ blogs,blogcat }) {
                               <div className="left-list">
                                 <span className="user">
                                   <a href="">
-                                    <i class="bi bi-person-circle"></i> {item.author}</a>
+                                    <i className="bi bi-person-circle"></i> {item.author}</a>
                                 </span>
                                 <span className="date">
                                   <a href="">
-                                    <i class="bi bi-calendar"></i> {item.publish_date}
+                                    <i className="bi bi-calendar"></i> {item.publish_date}
                                   </a>
                                 </span>
                                 <span className="time">
                                   <a href="">
-                                    <i class="bi bi-clock"></i> {item.read_time}
+                                    <i className="bi bi-clock"></i> {item.read_time}
                                   </a>
                                 </span>
                                 <span className="cate">
                                   <a href="">
-                                    <i class="bi bi-app"></i> {item.category}
+                                    <i className="bi bi-app"></i> {item.category}
                                   </a>
                                 </span>
                               </div>
@@ -121,28 +121,28 @@ function Post({ blogs,blogcat }) {
                                   target="_blank"
                                   rel=""
                                   href="https://twitter.com/dsquare_ca"
-                                  class="twitter"
+                                  className="twitter"
                                   aria-label="visit twitter"
                                 >
-                                  <i class="bi bi-twitter"></i>
+                                  <i className="bi bi-twitter"></i>
                                 </a>
                                 <a
                                   target="_blank"
                                   rel=""
                                   href="https://www.facebook.com/dynamicssquareca"
-                                  class="facebook"
+                                  className="facebook"
                                   aria-label="visit facebook"
                                 >
-                                  <i class="bi bi-facebook"></i>
+                                  <i className="bi bi-facebook"></i>
                                 </a>
                                 <a
                                   target="_blank"
                                   rel=""
                                   href="https://www.linkedin.com/company/dynamics-square-canada/"
-                                  class="linkedin"
+                                  className="linkedin"
                                   aria-label="visit linkedin"
                                 >
-                                  <i class="bi bi-linkedin"></i>
+                                  <i className="bi bi-linkedin"></i>
                                 </a>
                               </div>
                             </div>
@@ -158,28 +158,28 @@ function Post({ blogs,blogcat }) {
                                 target="_blank"
                                 rel=""
                                 href="https://twitter.com/dsquare_ca"
-                                class="twitter"
+                                className="twitter"
                                 aria-label="visit twitter"
                               >
-                                <i class="bi bi-twitter"></i>
+                                <i className="bi bi-twitter"></i>
                               </a>
                               <a
                                 target="_blank"
                                 rel=""
                                 href="https://www.facebook.com/dynamicssquareca"
-                                class="facebook"
+                                className="facebook"
                                 aria-label="visit facebook"
                               >
-                                <i class="bi bi-facebook"></i>
+                                <i className="bi bi-facebook"></i>
                               </a>
                               <a
                                 target="_blank"
                                 rel=""
                                 href="https://www.linkedin.com/company/dynamics-square-canada/"
-                                class="linkedin"
+                                className="linkedin"
                                 aria-label="visit linkedin"
                               >
-                                <i class="bi bi-linkedin"></i>
+                                <i className="bi bi-linkedin"></i>
                               </a>
                             </div>
                           </div>
@@ -197,7 +197,7 @@ function Post({ blogs,blogcat }) {
                     {blogcat &&
 
  blogcat.map((item1,i)=>(
-  <div className="col-lg-6">
+  <div key={i}><div className="col-lg-6" >
   <div className="blogs-lates blogs-lates-repet">
     <h3>
       <a href="/">
@@ -207,21 +207,21 @@ function Post({ blogs,blogcat }) {
     <div className="blogs-info-list">
     <span className="user">
                                   <a href="">
-                                    <i class="bi bi-person-circle"></i> {item1.author}</a>
+                                    <i className="bi bi-person-circle"></i> {item1.author}</a>
                                 </span>
                                 <span className="date">
                                   <a href="">
-                                    <i class="bi bi-calendar"></i> {item1.publish_date}
+                                    <i className="bi bi-calendar"></i> {item1.publish_date}
                                   </a>
                                 </span>
                                 <span className="time">
                                   <a href="">
-                                    <i class="bi bi-clock"></i> {item1.read_time}
+                                    <i className="bi bi-clock"></i> {item1.read_time}
                                   </a>
                                 </span>
                                 <span className="cate">
                                   <a href="">
-                                    <i class="bi bi-app"></i> {item1.category}
+                                    <i className="bi bi-app"></i> {item1.category}
                                   </a>
                                 </span>
     </div>
@@ -236,7 +236,8 @@ function Post({ blogs,blogcat }) {
       </div>
     </div>
   </div>
-</div>
+</div></div>
+  
  ))}
 
 
