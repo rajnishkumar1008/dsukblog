@@ -52,11 +52,11 @@ function Post({ blogs, blogcat }) {
                   />
                 </Head>
 
-                {/* <FacebookShareButton url={`/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
+                <FacebookShareButton url={`https://dsukblog.vercel.app/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
         Share on Facebook <i className="bi bi-twitter"></i>
-      </FacebookShareButton> */}
+      </FacebookShareButton>
 
-      <TwitterShareButton url={`/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
+      <TwitterShareButton url={`https://dsukblog.vercel.app/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
       <i className="bi bi-twitter"></i>
       </TwitterShareButton>
 
