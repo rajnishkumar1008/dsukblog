@@ -9,8 +9,8 @@ const Blogslugs = ({ blogs }) => {
 
               <Head>
               <title>test</title>
-              <meta name="description" content={item.meta_description} />
-              <meta name="viewport" content={item.meta_keyword} />
+              <meta name="description" />
+              <meta name="viewport" />
               <link rel="icon" href="/favicon.ico" />
             </Head>
 
