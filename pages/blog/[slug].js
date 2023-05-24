@@ -52,13 +52,13 @@ function Post({ blogs, blogcat }) {
                   />
                 </Head>
 
-                <FacebookShareButton url={`/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
-        Share on Facebook
-      </FacebookShareButton>
+                {/* <FacebookShareButton url={`/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
+        Share on Facebook <i className="bi bi-twitter"></i>
+      </FacebookShareButton> */}
 
-      {/* <TwitterShareButton url={`https://blognew.dynamicssquare.com/blog/${item.title_slug}`} media={item.meta_image} quote={item.title}>
+      <TwitterShareButton url={`/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
       <i className="bi bi-twitter"></i>
-      </TwitterShareButton> */}
+      </TwitterShareButton>
 
              
                   <div className="container">
