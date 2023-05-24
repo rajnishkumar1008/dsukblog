@@ -12,8 +12,8 @@ function Post({ blogs, blogcat }) {
   const title = "hello";
   return (
     <div>
-      <section className="text-gray-600 body-font">
-        <div className="container px-24 py-24 mx-auto">
+      <section>
+        <div className="container">
           {blogs &&
             blogs.map((item, i) => (
               <div key={i}>
