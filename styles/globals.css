@@ -8835,7 +8835,9 @@ ul.checkmark li {
 .blogs-content{
   padding:40px 0px;
   border-bottom: 1px solid #c9d2db;
-  position:relative
+  position:relative;
+  display:block;
+  overflow:hidden
 }
 .blogs-content p{
   font-size: 18px;

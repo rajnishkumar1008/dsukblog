@@ -3,13 +3,12 @@ import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
 import parse from "html-react-parser";
-// import {ShareSocial} from 'react-share-social';
-// import { FacebookShareButton, TwitterShareButton } from 'react-share';
+import BlogSubscriberForm from "../../components/BlogSubscriberForm";
+import {ShareSocial} from 'react-share-social';
+import { FacebookShareButton, TwitterShareButton } from 'react-share';
 
 function Post({ blogs, blogcat }) {
   const structuredData = JSON.stringify(blogs); // Convert the meta_image data to JSON string
-  const shareUrl = `https://blognew.dynamicssquare.com/api/blog/category/microsoft-365`;
-  const title = "hello";
   return (
     <div>
       <section>
@@ -43,7 +42,6 @@ function Post({ blogs, blogcat }) {
                     property="twitter:image"
                     content={`${item.meta_image}`}
                   />
-                  const structuredData = JSON.stringify(apiData);
                   <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
@@ -54,12 +52,12 @@ function Post({ blogs, blogcat }) {
                   />
                 </Head>
 
-                {/* <FacebookShareButton url={`https://blognew.dynamicssquare.com/api/blog/category/microsoft-365`} media={item.meta_image} quote={item.title}>
+                <FacebookShareButton url={`/blog/${item.title_slug}`} media={`${item.meta_image}`} quote={item.title}>
         Share on Facebook
       </FacebookShareButton>
 
-      <TwitterShareButton url={`https://blognew.dynamicssquare.com/blog/${item.title_slug}`} media={item.meta_image} quote={item.title}>
-        Share on Twitter
+      {/* <TwitterShareButton url={`https://blognew.dynamicssquare.com/blog/${item.title_slug}`} media={item.meta_image} quote={item.title}>
+      <i className="bi bi-twitter"></i>
       </TwitterShareButton> */}
 
              
@@ -104,13 +102,13 @@ function Post({ blogs, blogcat }) {
                                   </a>
                                 </span>
                                 <span className="date">
-                                  <a href="">
+                                  <a>
                                     <i className="bi bi-calendar"></i>{" "}
                                     {item.publish_date}
                                   </a>
                                 </span>
                                 <span className="time">
-                                  <a href="">
+                                  <a>
                                     <i className="bi bi-clock"></i>{" "}
                                     {item.read_time}
                                   </a>
@@ -154,9 +152,21 @@ function Post({ blogs, blogcat }) {
                               </div>
                             </div>
                           </div>
+                          
                           <div className="blogs-content">
                             {parse(item.description)}
-
+                            <div className="blog-side-head">
+                        <div className="left">
+                          <img
+                            src="/img/business-center-logo.svg"
+                            alt="bg-pic"
+                          />
+                        </div>
+                        <div className="right">
+                          Dynamics 365 <br />
+                          <span>Business Central</span>
+                        </div>
+                      </div>
                             <div className="sociallist sociallist-bott">
                               <a
                                 target="_blank"
@@ -213,13 +223,13 @@ function Post({ blogs, blogcat }) {
                                     </a>
                                   </span>
                                   <span className="date">
-                                    <a href="">
+                                    <a>
                                       <i className="bi bi-calendar"></i>{" "}
                                       {item1.publish_date}
                                     </a>
                                   </span>
                                   <span className="time">
-                                    <a href="">
+                                    <a>
                                       <i className="bi bi-clock"></i>{" "}
                                       {item1.read_time}
                                     </a>
@@ -260,28 +270,8 @@ function Post({ blogs, blogcat }) {
                               month, so we try to make it useful.
                             </p>
                           </div>
-                          <form className="sbb-form">
-                            <div className="mb-3">
-                              <input
-                                type="email"
-                                className="form-control"
-                                placeholder="* Work Email"
-                                name="email"
-                                required
-                              />
-                            </div>
-                            <button
-                              type="submit"
-                              className="btn btn-primary fomr-submit"
-                            >
-                              Subscribe
-                            </button>
-                            <div className="" role="status">
-                              <span className="visually-hidden">
-                                Loading...
-                              </span>
-                            </div>
-                          </form>
+                          <BlogSubscriberForm />
+                          
                         </div>
                       </div>
                     </div>
