@@ -8584,7 +8584,7 @@ ul.checkmark li {
 .blogs-info-list .user a,.blogs-info-list .date a,.blogs-info-list .time a, .blogs-info-list .cate a {
   font-size:14px;
   margin-right: 15px;
-  color:#606c77
+  color:#606c77 !important
 }
 .blogs-info-list .user a i,.blogs-info-list .date a i,.blogs-info-list .time a i, .blogs-info-list .cate a i{
   color:#b52c36;
@@ -8683,6 +8683,9 @@ ul.checkmark li {
   background: #273266;
   width: 1px;
   height: 100%;
+}
+.blogs-info-list-side h3{
+  width:100%
 }
 .blogs-info-list-side h3 a{
   font-size: 19px;

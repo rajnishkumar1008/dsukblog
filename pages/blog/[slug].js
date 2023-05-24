@@ -2,11 +2,11 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
 // import {ShareSocial} from 'react-share-social';
 // import { FacebookShareButton, TwitterShareButton } from 'react-share';
 
-function Post({ blogs,blogcat }) {
+function Post({ blogs, blogcat }) {
   const structuredData = JSON.stringify(blogs); // Convert the meta_image data to JSON string
   const shareUrl = `https://blognew.dynamicssquare.com/api/blog/category/microsoft-365`;
   const title = "hello";
@@ -17,7 +17,6 @@ function Post({ blogs,blogcat }) {
           {blogs &&
             blogs.map((item, i) => (
               <div key={i}>
-             
                 <Head>
                   <title>{item.meta_title}</title>
                   <meta name="description" content={item.meta_description} />
@@ -26,30 +25,35 @@ function Post({ blogs,blogcat }) {
                     rel="canonical"
                     href={`https://dynamicssquare.ca/blog/${item.title_slug}`}
                   />
-
                   <meta property="og:title" content={item.meta_title} />
                   <meta property="og:site_name" content="Dynamics Square" />
-                  <meta property="og:url" content={`https://dynamicssquare.ca/blog/${item.title_slug}`} />
+                  <meta
+                    property="og:url"
+                    content={`https://dynamicssquare.ca/blog/${item.title_slug}`}
+                  />
                   <meta property="og:description" content={item.meta_keyword} />
                   <meta property="og:type" content="website" />
                   <meta property="og:image" content={`${item.meta_image}`} />
                   <meta property="twitter:card" content="summary_large_image" />
                   <meta property="twitter:url" content="" />
                   <meta property="twitter:title" content={item.meta_title} />
-                  <meta property="twitter:description" content={item.meta_keyword} />
-                  <meta property="twitter:image" content={`${item.meta_image}`} />
-                 
+                  <meta
+                    property="twitter:description"
+                    content={item.meta_keyword}
+                  />
+                  <meta
+                    property="twitter:image"
+                    content={`${item.meta_image}`}
+                  />
                   const structuredData = JSON.stringify(apiData);
-    
-
-          <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          structuredData:item.additional_script
-          })
-            }}
-          />
-
+                  <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                      __html: JSON.stringify({
+                        structuredData: item.additional_script,
+                      }),
+                    }}
+                  />
                 </Head>
 
                 {/* <FacebookShareButton url={`https://blognew.dynamicssquare.com/api/blog/category/microsoft-365`} media={item.meta_image} quote={item.title}>
@@ -97,21 +101,26 @@ function Post({ blogs,blogcat }) {
                               <div className="left-list">
                                 <span className="user">
                                   <a href="">
-                                    <i className="bi bi-person-circle"></i> {item.author}</a>
+                                    <i className="bi bi-person-circle"></i>{" "}
+                                    {item.author}
+                                  </a>
                                 </span>
                                 <span className="date">
                                   <a href="">
-                                    <i className="bi bi-calendar"></i> {item.publish_date}
+                                    <i className="bi bi-calendar"></i>{" "}
+                                    {item.publish_date}
                                   </a>
                                 </span>
                                 <span className="time">
                                   <a href="">
-                                    <i className="bi bi-clock"></i> {item.read_time}
+                                    <i className="bi bi-clock"></i>{" "}
+                                    {item.read_time}
                                   </a>
                                 </span>
                                 <span className="cate">
                                   <a href="">
-                                    <i className="bi bi-app"></i> {item.category}
+                                    <i className="bi bi-app"></i>{" "}
+                                    {item.category}
                                   </a>
                                 </span>
                               </div>
@@ -148,10 +157,7 @@ function Post({ blogs,blogcat }) {
                             </div>
                           </div>
                           <div className="blogs-content">
-                          {parse(
-   item.description
-  )}
-                         
+                            {parse(item.description)}
 
                             <div className="sociallist sociallist-bott">
                               <a
@@ -193,56 +199,52 @@ function Post({ blogs,blogcat }) {
                     </div>
 
                     <div className="row pd-90">
-                    
-                    {blogcat &&
-
- blogcat.map((item1,i)=>(
-  <div key={i}><div className="col-lg-6" >
-  <div className="blogs-lates blogs-lates-repet">
-    <h3>
-      <a href="/">
-       {item1.title}
-      </a>
-    </h3>
-    <div className="blogs-info-list">
-    <span className="user">
-                                  <a href="">
-                                    <i className="bi bi-person-circle"></i> {item1.author}</a>
-                                </span>
-                                <span className="date">
-                                  <a href="">
-                                    <i className="bi bi-calendar"></i> {item1.publish_date}
-                                  </a>
-                                </span>
-                                <span className="time">
-                                  <a href="">
-                                    <i className="bi bi-clock"></i> {item1.read_time}
-                                  </a>
-                                </span>
-                                <span className="cate">
-                                  <a href="">
-                                    <i className="bi bi-app"></i> {item1.category}
-                                  </a>
-                                </span>
-    </div>
-    <div className="b-card-info">
-      <p>
-       {item1.short_description}
-      </p>
-      <div className="page-link-read">
-        <a href={`/blog/${item1.title_slug}`}>
-          Read More <span>{">"}</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div></div>
-  
- ))}
-
-
-                     
-      
+                      {blogcat &&
+                        blogcat.map((item1, i) => (
+                          <div key={i}>
+                            <div className="col-lg-6">
+                              <div className="blogs-lates blogs-lates-repet">
+                                <h3>
+                                  <a href="/">{item1.title}</a>
+                                </h3>
+                                <div className="blogs-info-list">
+                                  <span className="user">
+                                    <a href="">
+                                      <i className="bi bi-person-circle"></i>{" "}
+                                      {item1.author}
+                                    </a>
+                                  </span>
+                                  <span className="date">
+                                    <a href="">
+                                      <i className="bi bi-calendar"></i>{" "}
+                                      {item1.publish_date}
+                                    </a>
+                                  </span>
+                                  <span className="time">
+                                    <a href="">
+                                      <i className="bi bi-clock"></i>{" "}
+                                      {item1.read_time}
+                                    </a>
+                                  </span>
+                                  <span className="cate">
+                                    <a href="">
+                                      <i className="bi bi-app"></i>{" "}
+                                      {item1.category}
+                                    </a>
+                                  </span>
+                                </div>
+                                <div className="b-card-info">
+                                  <p>{item1.short_description}</p>
+                                  <div className="page-link-read">
+                                    <a href={`/blog/${item1.title_slug}`}>
+                                      Read More <span>{">"}</span>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </div>
@@ -299,11 +301,12 @@ export async function getServerSideProps(context) {
   console.log(slug);
   const res = await fetch(
     "https://blognew.dynamicssquare.com/api/blog_details/" + slug
-    
   );
-  const res1=await fetch('https://blognew.dynamicssquare.com/api/blog/category/microsoft-365');
-  const blogcat= await res1.json();
+  const res1 = await fetch(
+    "https://blognew.dynamicssquare.com/api/blog/category/microsoft-365"
+  );
+  const blogcat = await res1.json();
   const blogs = await res.json();
-  return { props: { blogs,blogcat } };
+  return { props: { blogs, blogcat } };
 }
 export default Post;
