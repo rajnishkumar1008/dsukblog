@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
+import BlogSubscriberForm from "../../components/BlogSubscriberForm";
 
 export async function getServerSideProps() {
   const res = await fetch(process.env.BACKEND_URL + "/api/allblog");
@@ -11,10 +12,15 @@ export async function getServerSideProps() {
   );
   const businesscentral = await business.json();
 
-  return { props: { blogs, businesscentral } };
+  const categoryblog = await fetch(
+    "https://blognew.dynamicssquare.com/api/blog/category"
+  );
+  const  categoryblogs = await  categoryblog.json();
+
+  return { props: { blogs, businesscentral , categoryblogs } };
 }
 
-function Blogshome({ blogs, businesscentral }) {
+function Blogshome({ blogs, businesscentral, categoryblogs }) {
   return (
     <div>
       <Head>
@@ -27,12 +33,12 @@ function Blogshome({ blogs, businesscentral }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section className="text-gray-600 body-font">    
           {blogs &&
             blogs.map((item, i) => (
-              <div className="flex flex-wrap -m-4" key={i}>
+              <div  key={i}>
                 <div className="blogs-main">
                   <div className="container">
+       
                     <div className="row g-5">
                       <div className="col-lg-6">
                         <div className="blogs-lates">
@@ -154,7 +160,7 @@ function Blogshome({ blogs, businesscentral }) {
                       <div className="col-lg-6 align-self-center">
                         <div className="blogs-lates">
                           <div className="blog-sian">
-                            <span>Latest</span>
+                            <span>Most Trending</span>
                           </div>
                           <h2>
                           <Link href={`/blog/${item.title_slug}`}>
@@ -207,28 +213,8 @@ function Blogshome({ blogs, businesscentral }) {
                               month, so we try to make it useful.
                             </p>
                           </div>
-                          <form className="sbb-form">
-                            <div className="mb-3">
-                              <input
-                                type="email"
-                                className="form-control"
-                                placeholder="* Work Email"
-                                name="email"
-                                required
-                              />
-                            </div>
-                            <button
-                              type="submit"
-                              className="btn btn-primary fomr-submit"
-                            >
-                              Subscribe
-                            </button>
-                            <div className="" role="status">
-                              <span className="visually-hidden">
-                                Loading...
-                              </span>
-                            </div>
-                          </form>
+                          <BlogSubscriberForm />
+                          
                         </div>
                       </div>
                     </div>
@@ -242,24 +228,14 @@ function Blogshome({ blogs, businesscentral }) {
                         <div className="blogs-ex-side-cate">
                           <h3>Explore by Topic</h3>
                           <ul>
-                            <li>
-                              <a href="#">Business Central</a>
-                            </li>
-                            <li>
-                              <a href="#">Power BI</a>
-                            </li>
-                            <li>
-                              <a href="#">Dynamics NAV</a>
-                            </li>
-                            <li>
-                              <a href="#">Dynamics AX</a>
-                            </li>
-                            <li>
-                              <a href="#">Dynamics GP</a>
-                            </li>
-                            <li>
-                              <a href="#">Updates</a>
-                            </li>
+                          {categoryblogs &&
+            categoryblogs.map((cateitem, i) => (
+              <li>
+              <Link href={`/blog/category/${cateitem.category_slug}`}><a>{cateitem.category_name}</a></Link>
+            </li>
+
+            ))}
+  
                           </ul>
                         </div>
                       </div>
@@ -491,53 +467,18 @@ function Blogshome({ blogs, businesscentral }) {
                               month, so we try to make it useful.
                             </p>
                           </div>
-                          <form className="sbb-form">
-                            <div className="mb-3">
-                              <input
-                                type="email"
-                                className="form-control"
-                                placeholder="* Work Email"
-                                name="email"
-                                required
-                              />
-                            </div>
-                            <button
-                              type="submit"
-                              className="btn btn-primary fomr-submit"
-                            >
-                              Subscribe
-                            </button>
-                            <div className="" role="status">
-                              <span className="visually-hidden">
-                                Loading...
-                              </span>
-                            </div>
-                          </form>
+                          <BlogSubscriberForm />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="xl:w-1/3 md:w-1/2 p-4">
-                  <div className="border border-gray-200 p-6 rounded-lg">
-                    <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
-                      <img src={item.image} />
-                    </div>
-                    <Link href={`/blog/${item.title_slug}`}>
-                      <a>
-                        <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-                          {item.title}
-                        </h2>
-                      </a>
-                    </Link>
-                    <p className="leading-relaxed text-base">{item.category}</p>
-                  </div>
-                </div>
+
               </div>
             ))}
   
-      </section>
+  
     </div>
   );
 }

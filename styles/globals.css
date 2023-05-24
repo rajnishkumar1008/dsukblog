@@ -8556,6 +8556,9 @@ ul.checkmark li {
   margin-bottom: 40px;
   border-bottom: 1px solid #c9d2db;
 }
+.blogs-lates-rept:last-child{
+  border:none
+}
 .blog-sian{}
 .blog-sian span{
   background-color: #b52c36;
