@@ -19,7 +19,6 @@ function Post({ blogs, blogcat }) {
                 <Head>
                   <title>{item.meta_title}</title>
                   <meta name="description" content={item.meta_description} />
-                  <meta name="viewport" content={item.meta_keyword} />
                   <link
                     rel="canonical"
                     href={`https://dynamicssquare.ca/blog/${item.title_slug}`}
@@ -63,7 +62,7 @@ function Post({ blogs, blogcat }) {
         Share on Twitter
       </TwitterShareButton> */}
 
-                <div className="blogs-inner-main">
+             
                   <div className="container">
                     <div className="row">
                       <div className="col-lg-12">
@@ -246,7 +245,7 @@ function Post({ blogs, blogcat }) {
                         ))}
                     </div>
                   </div>
-                </div>
+          
 
                 <div className="bootom-blogs-sub">
                   <div className="container">
