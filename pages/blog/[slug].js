@@ -13,7 +13,6 @@ function Post({ blogs, blogcat }) {
   return (
     <div>
       <section>
-        <div className="container">
           {blogs &&
             blogs.map((item, i) => (
               <div key={i}>
@@ -291,7 +290,7 @@ function Post({ blogs, blogcat }) {
                 </div>
               </div>
             ))}
-        </div>
+   
       </section>
     </div>
   );
