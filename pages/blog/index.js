@@ -79,7 +79,7 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                         </span>
                       </div>
                       <div className="b-card-info">
-                        <p>{item.short_description}</p>
+                        <p>{item.short_description.substring(0, 180)}...</p>
                         <div className="page-link-read">
                           <Link href={`/blog/${item.title_slug}`}>
                             <a>
@@ -193,7 +193,7 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                         </span>
                       </div>
                       <div className="b-card-info">
-                        <p>{item.short_description}</p>
+                        <p>{item.short_description.substring(0, 180)}...</p>
                         <div className="page-link-read">
                           <Link href={`/blog/${item.title_slug}`}>
                             <a>
@@ -275,7 +275,7 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                         </span>
                           </div>
                           <div className="b-card-info">
-                            <p>{randomitem.short_description}</p>
+                            <p>{randomitem.short_description.substring(0, 180)}...</p>
                             <div className="page-link-read">
                              <Link href={`/blog/${randomitem.title_slug}`}><a>
                                 Read More <span>{">"}</span>

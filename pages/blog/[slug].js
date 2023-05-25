@@ -11,7 +11,8 @@ import {
   LinkedinShareButton,
 } from "react-share";
 
-function Post({ blogs, blogcat }) {
+function Post({ blogs, blogcat, authordetials, author }) {
+  console.log(author)
   const structuredData = JSON.stringify(blogs); // Convert the meta_image data to JSON string
   return (
     <div>
@@ -82,9 +83,7 @@ function Post({ blogs, blogcat }) {
                   <div className="col-lg-8">
                     <div className="blogs-single-post-sec">
                       <div className="blogs-lates blogs-lates-top-head">
-                        <h1>
-                          <a href="">{item.title}</a>
-                        </h1>
+                        <h1>{item.title}</h1>
                         <div className="blogs-info-list">
                           <div className="left-list">
                             <span className="user">
@@ -136,61 +135,69 @@ function Post({ blogs, blogcat }) {
                               url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}
                               media={`${item.meta_image}`}
                               source={item.title}
+                              summary={item.short_description.substring(0, 60)}
                             >
                               <a>
                                 <i className="bi bi-linkedin"></i>
                               </a>
                             </LinkedinShareButton>
-                            
                           </div>
                         </div>
                       </div>
 
                       <div className="blogs-content">
-                        {parse(item.description)}
-                        <div className="blog-side-head">
-                          <div className="left">
-                            <img
-                              src="/img/business-center-logo.svg"
-                              alt="bg-pic"
-                            />
-                          </div>
-                          <div className="right">
-                            Dynamics 365 <br />
-                            <span>Business Central</span>
-                          </div>
+                        <div className="blogs-content-inner">
+                          {parse(item.description)}
                         </div>
                         <div className="sociallist sociallist-bott">
-                        <FacebookShareButton
-                              url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}
-                              media={`${item.meta_image}`}
-                              quote={item.title}
-                            >
-                              <a>
-                                <i className="bi bi-facebook"></i>
-                              </a>
-                            </FacebookShareButton>
+                          <FacebookShareButton
+                            url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}
+                            media={`${item.meta_image}`}
+                            quote={item.title}
+                          >
+                            <a>
+                              <i className="bi bi-facebook"></i>
+                            </a>
+                          </FacebookShareButton>
 
-                            <TwitterShareButton
-                              url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}
-                              media={`${item.meta_image}`}
-                              quote={item.title}
-                            >
-                              <a>
-                                <i className="bi bi-twitter"></i>
-                              </a>
-                            </TwitterShareButton>
+                          <TwitterShareButton
+                            url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}
+                            media={`${item.meta_image}`}
+                            quote={item.title}
+                          >
+                            <a>
+                              <i className="bi bi-twitter"></i>
+                            </a>
+                          </TwitterShareButton>
 
-                            <LinkedinShareButton
-                              url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}
-                              media={`${item.meta_image}`}
-                              source={item.title}
-                            >
-                              <a>
-                                <i className="bi bi-linkedin"></i>
-                              </a>
-                            </LinkedinShareButton>
+                          <LinkedinShareButton
+                            url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}
+                            media={`${item.meta_image}`}
+                            source={item.title}
+                          >
+                            <a>
+                              <i className="bi bi-linkedin"></i>
+                            </a>
+                          </LinkedinShareButton>
                         </div>
+                        {authordetials &&
+                          authordetials.map((author, i) => (
+                            <div className="author-side-head" key={i}>
+                              <div className="left">
+                                <img
+                                  src={author.profile_photo_path}
+                                  alt="bg-pic"
+                                />
+                                <span className="link-din"><a href=""> <i className="bi bi-linkedin"></i></a></span>
+                              </div>
+                              <div className="right">
+                               <Link href={`/blog/category/${author.author_email}`}><a><span>{author.name}</span></a></Link>
+                               <p>{author.about}</p>
+                              </div>
+                            </div>
+                          ))}
+
+                       
                       </div>
                     </div>
                   </div>
@@ -204,44 +211,44 @@ function Post({ blogs, blogcat }) {
                 <div className="row pd-90">
                   {blogcat &&
                     blogcat.map((item1, i) => (
-                      <div key={i}>
-                        <div className="col-lg-6">
-                          <div className="blogs-lates blogs-lates-repet">
-                            <h3>
-                              <a href="/">{item1.title}</a>
-                            </h3>
-                            <div className="blogs-info-list">
-                              <span className="user">
-                                <a href="">
-                                  <i className="bi bi-person-circle"></i>{" "}
-                                  {item1.author}
-                                </a>
-                              </span>
-                              <span className="date">
-                                <a>
-                                  <i className="bi bi-calendar"></i>{" "}
-                                  {item1.publish_date}
-                                </a>
-                              </span>
-                              <span className="time">
-                                <a>
-                                  <i className="bi bi-clock"></i>{" "}
-                                  {item1.read_time}
-                                </a>
-                              </span>
-                              <span className="cate">
-                                <a href="">
-                                  <i className="bi bi-app"></i> {item1.category}
-                                </a>
-                              </span>
-                            </div>
-                            <div className="b-card-info">
-                              <p>{item1.short_description}</p>
-                              <div className="page-link-read">
-                                <a href={`/blog/${item1.title_slug}`}>
-                                  Read More <span>{">"}</span>
-                                </a>
-                              </div>
+                      <div className="col-lg-6" key={i}>
+                        <div className="blogs-lates blogs-lates-repet">
+                          <h3>
+                            <Link href={`/blog/${item1.title_slug}`}>
+                              <a>{item1.title}</a>
+                            </Link>
+                          </h3>
+                          <div className="blogs-info-list">
+                            <span className="user">
+                              <a href="">
+                                <i className="bi bi-person-circle"></i>{" "}
+                                {item1.author}
+                              </a>
+                            </span>
+                            <span className="date">
+                              <a>
+                                <i className="bi bi-calendar"></i>{" "}
+                                {item1.publish_date}
+                              </a>
+                            </span>
+                            <span className="time">
+                              <a>
+                                <i className="bi bi-clock"></i>{" "}
+                                {item1.read_time}
+                              </a>
+                            </span>
+                            <span className="cate">
+                              <a href="">
+                                <i className="bi bi-app"></i> {item1.category}
+                              </a>
+                            </span>
+                          </div>
+                          <div className="b-card-info">
+                            <p>{item1.short_description.substring(0, 60)}</p>
+                            <div className="page-link-read">
+                              <a href={`/blog/${item1.title_slug}`}>
+                                Read More <span>{">"}</span>
+                              </a>
                             </div>
                           </div>
                         </div>
@@ -281,11 +288,20 @@ export async function getServerSideProps(context) {
   const res = await fetch(
     "https://blognew.dynamicssquare.com/api/blog_details/" + slug
   );
+  const blogs = await res.json();
+
+  const category = blogs[0]["category_slug"];
   const res1 = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/category/microsoft-365"
+    "https://blognew.dynamicssquare.com/api/blog/category/" + category
   );
   const blogcat = await res1.json();
-  const blogs = await res.json();
-  return { props: { blogs, blogcat } };
+
+  const author = blogs[0]["author_email"];
+  const authorres = await fetch(
+    "https://blognew.dynamicssquare.com/api/blog/author/details/"+author
+  );
+  const authordetials = await authorres.json();
+
+  return { props: { blogs, blogcat, authordetials, author } };
 }
 export default Post;

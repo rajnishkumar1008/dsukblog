@@ -8577,6 +8577,10 @@ ul.checkmark li {
   color: #1d3557;
   display:block
 }
+.blogs-lates h1 a:hover,.blogs-lates  h2 a:hover,.blogs-lates  h3 a:hover,.page-link-read a:hover,.blogs-info-list-side h3 a:hover{
+  color:#254b81
+}
+
 
 .blogs-info-list{
   display: flex;
@@ -8592,6 +8596,9 @@ ul.checkmark li {
 .blogs-info-list .user a i,.blogs-info-list .date a i,.blogs-info-list .time a i, .blogs-info-list .cate a i{
   color:#b52c36;
   margin-right: 5px;
+}
+.blogs-info-list .user a:hover, .blogs-info-list .date a:hover, .blogs-info-list .time a:hover, .blogs-info-list .cate a:hover{
+  color:#bb2b36 !important
 }
 .b-card-info{}
 .b-card-info p{
@@ -8823,8 +8830,18 @@ ul.checkmark li {
     line-height: 2.2;
     font-size: 14px;
 }
-.blogs-lates.blogs-lates-top-head h1 a{
+.sociallist a:hover{
+  background:#1d3557
+}
+.sociallist a:hover i{
+  color:#fff
+}
+.blogs-lates.blogs-lates-top-head h1{
   font-size: 48px !important;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1d3557;
+  display: block;
 }
 .blogs-lates.blogs-lates-repet {
   padding-right:20px
@@ -8862,12 +8879,97 @@ ul.checkmark li {
 .blogs-content ul li{}
 .blogs-content ul li a{}
 .blogs-content ul li a:hover{}
+.blogs-content img{
+  display:block;
+  margin-bottom:25px
+}
 .sociallist-bott {
-  text-align: right;
+  /* text-align: right;
   position: absolute;
   right: -2px;
-  bottom: -12px;
+  bottom: 20px;
   background: #fff;
-  width: 190px;
+  width: 190px; */
+  display: flex;
+    justify-content: right;
+    padding-top: 0px;
+    margin-bottom: 20px;
 }
 .pd-90{padding-top: 80px;}
+.author-side-head{
+  display: flex;
+  overflow: hidden;
+  background: #1d3557;
+  padding: 20px;
+  border-radius: 15px;
+}
+.author-side-head .left{
+  margin-right: 5px;
+    flex: 10%;
+    width: 10%;
+    position:relative
+}
+.author-side-head .left img{
+  border-radius: 50%;
+    width: 74px;
+    height: 74px;
+}
+.author-side-head .left .link-din{
+  position: absolute;
+    bottom: 0;
+    left: 30%;
+    font-size: 16px;
+}
+.author-side-head .left .link-din a i{
+  color:#fff
+}
+.author-side-head .left .link-din a:hover i{
+  color:red
+}
+.author-side-head .right{
+  flex: 80%;
+    width:80%;
+}
+.author-side-head .right a span{
+  margin-bottom: 10px;
+    display: block;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 20px;
+}
+.author-side-head .right a span:hover{
+  color:var(--color-red)
+}
+.author-side-head .right p{
+  font-size: 14px;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 0;
+  font-weight: 400;
+  letter-spacing: .5px;
+}
+
+
+
+
+
+@media (min-width: 1201px) and (max-width: 1400px){
+  .blogs-lates h1 a, .blogs-lates.blogs-lates-top-head h1{
+    font-size:40px !important
+  }
+  .blogs-lates h2 a, .blogs-lates h3 a {
+    font-size: 36px !important;
+}
+}
+@media (min-width: 993px) and (max-width: 1199px){
+  
+}
+@media (min-width: 992px) {
+  
+}
+@media (min-width: 768px) and (max-width: 991px){
+  
+}
+@media (min-width: 0px) and (max-width: 767px){
+  
+}
