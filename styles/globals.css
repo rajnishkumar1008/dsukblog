@@ -8917,7 +8917,7 @@ ul.checkmark li {
 .author-side-head .left .link-din{
   position: absolute;
     bottom: 0;
-    left: 30%;
+    left: 25%;
     font-size: 16px;
 }
 .author-side-head .left .link-din a i{
@@ -8959,6 +8959,10 @@ ul.checkmark li {
   }
   .blogs-lates h2 a, .blogs-lates h3 a {
     font-size: 36px !important;
+}
+.author-side-head .left .link-din{
+
+    left: 30%;
 }
 }
 @media (min-width: 993px) and (max-width: 1199px){
