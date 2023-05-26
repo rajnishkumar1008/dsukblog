@@ -22,6 +22,11 @@ export async function getServerSideProps() {
   );
   const blograndomblogs = await blograndom.json();
 
+  // const blogauthor = await fetch(
+  //   "https://blognew.dynamicssquare.com/api/blog/author/admin"
+  // );
+  // const blogauthorblogs = await blogauthor.json();
+
   return { props: { blogs, businesscentral, categoryblogs, blograndomblogs } };
 }
 
@@ -56,10 +61,10 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                       </h1>
                       <div className="blogs-info-list">
                         <span className="user">
-                          <a href="">
+                         <Link href={`/blog/author/${item.author}`}><a>
                             <i className="bi bi-person-circle"></i>{" "}
                             {item.author}
-                          </a>
+                          </a></Link>
                         </span>
                         <span className="date">
                           <a>

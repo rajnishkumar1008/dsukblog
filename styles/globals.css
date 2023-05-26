@@ -341,9 +341,10 @@ section {
 .header.header-scrolled {
   background: #fff;
   padding: 5px 30px;
-  box-shadow: var(--shadow-medium);
+  /* box-shadow: var(--shadow-medium);
   -moz-box-shadow: var(--shadow-medium);
-  -webkit-box-shadow: var(--shadow-medium);
+  -webkit-box-shadow: var(--shadow-medium); */
+  box-shadow: 0 100px 80px rgba(22,61,151,.07), 0 41.7776px 33.4221px rgba(22,61,151,.05), 0 22.3363px 17.869px rgba(22,61,151,.042), 0 12.5216px 10.0172px rgba(22,61,151,.035), 0 6.6501px 5.32008px rgba(22,61,151,.028), 0 2.76726px 2.21381px rgba(22,61,151,.02);
 }
 .blog .sidebar .search-form form button i,
 .header .logo {
@@ -8948,8 +8949,48 @@ ul.checkmark li {
   font-weight: 400;
   letter-spacing: .5px;
 }
+.sidebar {
+  position: fixed;
+  top: 50px; /* Adjust this value to set the desired top position of the sidebar */
+  left: 20px; /* Adjust this value to set the desired left position of the sidebar */
+  width: 200px; /* Adjust this value to set the desired width of the sidebar */
+  height: 300px; /* Adjust this value to set the desired height of the sidebar */
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.auter-cate{
 
+}
+.auter-cate h3{
+  margin-bottom: 30px;
+    color: #1d3557;
+    font-weight: 600;
+    font-size: 28px;
+}
+.auter-cate ul{ 
+  list-style: none;
+    padding: 0;
+}
+.auter-cate ul li{ 
+  margin-bottom: 10px;
+}
+.auter-cate ul li a{ 
+  display: inline-block;
+  padding: 5px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #1d3557;
+}
+.auter-cate ul li a img{ 
+  width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
+.auter-cate ul li a span{font-size: 14px;
+  font-weight: 600;}
 
 
 

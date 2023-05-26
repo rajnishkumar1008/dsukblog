@@ -9,16 +9,20 @@ export async function getServerSideProps(context) {
     process.env.BACKEND_URL + "/api/blog/category/" + slug
   );
   const blogs = await res.json();
-
-  const categoryblog = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/category"
+  const authors = await fetch(
+    "https://blognew.dynamicssquare.com/api/allauthor"
   );
-  const categoryblogs = await categoryblog.json();
+  const authorslist = await authors.json();
 
-  return { props: { blogs, categoryblogs } };
+  const blgsbyauthors = await fetch(
+    "https://blognew.dynamicssquare.com/api/blog/author/"+slug
+  );
+  const blgsbyauthorslist = await blgsbyauthors.json();
+
+  return { props: { blogs, authorslist, blgsbyauthorslist } };
 }
 
-function CategoryBlogs({ blogs, categoryblogs }) {
+function Authors({ blogs, authorslist, blgsbyauthorslist }) {
   return (
     <div>
       <Head>
@@ -33,7 +37,7 @@ function CategoryBlogs({ blogs, categoryblogs }) {
 
       <div className="blogs-extra-new">
         <div className="container">
-        <div className="row">
+          <div className="row">
             <div className="col-lg-12">
               <div className="blogs-breadcromb">
                 <nav aria-label="breadcrumb">
@@ -48,7 +52,7 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                         <a>Blog</a>
                       </Link>
                     </li>
-                    <li className="breadcrumb-item active"></li>
+                    <li className="breadcrumb-item active">{blgsbyauthorslist[0]['author']}</li>
                   </ol>
                 </nav>
               </div>
@@ -56,14 +60,14 @@ function CategoryBlogs({ blogs, categoryblogs }) {
           </div>
           <div className="row">
             <div className="col-lg-3">
-              <div className="blogs-ex-side-cate">
-                <h3>Explore by Topic</h3>
+              <div className="auter-cate">
+                <h3>Our Authors</h3>
                 <ul>
-                  {categoryblogs &&
-                    categoryblogs.map((cateitem, i) => (
+                  {authorslist &&
+                    authorslist.map((authorsitem, i) => (
                       <li>
-                        <Link href={`/blog/category/${cateitem.category_slug}`}>
-                          <a>{cateitem.category_name}</a>
+                        <Link href={`/blog/author/${authorsitem.name}`}>
+                          <a><img src={authorsitem.profile_photo_path} alt={authorsitem.name} /> <span>{authorsitem.name}</span></a>
                         </Link>
                       </li>
                     ))}
@@ -71,8 +75,8 @@ function CategoryBlogs({ blogs, categoryblogs }) {
               </div>
             </div>
             <div className="col-lg-9">
-              {blogs &&
-                blogs.map((item, i) => (
+              {blgsbyauthorslist &&
+                blgsbyauthorslist.map((item, i) => (
                   <div className="blogs-lates blogs-lates-rept">
                     <h3>
                       <Link href={`/blog/${item.title_slug}`}>
@@ -81,7 +85,7 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                     </h3>
                     <div className="blogs-info-list">
                       <span className="user">
-                        <a href={`/blog/author/${item.author_email}`}>
+                        <a href="">
                           <i className="bi bi-person-circle"></i>
                           {item.author}
                         </a>
@@ -99,14 +103,13 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                         </a>
                       </span>
                       <span className="cate">
-                        <a href={`/blog/category/${item.category_slug}`}>
-                          <i className="bi bi-app"></i>
-                          {item.category}
-                        </a>
+                      <Link href={`/blog/category/${item.category_slug}`}><a>
+                            <i className="bi bi-app"></i> {item.category}
+                          </a></Link>
                       </span>
                     </div>
                     <div className="b-card-info">
-                    <p>{item.short_description}</p>
+                      <p>{item.short_description}</p>
                       <div className="page-link-read">
                         <Link href={`/blog/${item.title_slug}`}>
                           <a>
@@ -182,4 +185,4 @@ function CategoryBlogs({ blogs, categoryblogs }) {
   );
 }
 
-export default CategoryBlogs;
+export default Authors;

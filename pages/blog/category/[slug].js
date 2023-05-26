@@ -99,10 +99,9 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                         </a>
                       </span>
                       <span className="cate">
-                        <a href="">
-                          <i className="bi bi-app"></i>
-                          {item.category}
-                        </a>
+                      <Link href={`/blog/category/${item.category_slug}`}><a>
+                            <i className="bi bi-app"></i> {item.category}
+                          </a></Link>
                       </span>
                     </div>
                     <div className="b-card-info">

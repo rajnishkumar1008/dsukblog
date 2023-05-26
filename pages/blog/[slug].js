@@ -1,4 +1,4 @@
-import React from "react";
+
 import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
@@ -11,11 +11,18 @@ import {
   LinkedinShareButton,
 } from "react-share";
 
+
 function Post({ blogs, blogcat, authordetials, author }) {
   console.log(author)
   const structuredData = JSON.stringify(blogs); // Convert the meta_image data to JSON string
+
+
+  
+  
   return (
+    
     <div>
+      
       <section>
         {blogs &&
           blogs.map((item, i) => (
@@ -87,10 +94,7 @@ function Post({ blogs, blogcat, authordetials, author }) {
                         <div className="blogs-info-list">
                           <div className="left-list">
                             <span className="user">
-                              <a href="">
-                                <i className="bi bi-person-circle"></i>{" "}
-                                {item.author}
-                              </a>
+                              <Link href={`/blog/author/${item.author}`}>{item.author}</Link>
                             </span>
                             <span className="date">
                               <a>
@@ -104,9 +108,9 @@ function Post({ blogs, blogcat, authordetials, author }) {
                               </a>
                             </span>
                             <span className="cate">
-                              <a href="">
-                                <i className="bi bi-app"></i> {item.category}
-                              </a>
+                            <Link href={`/blog/category/${item.category_slug}`}><a>
+                            <i className="bi bi-app"></i> {item.category}
+                          </a></Link>
                             </span>
                           </div>
 
@@ -188,7 +192,7 @@ function Post({ blogs, blogcat, authordetials, author }) {
                                   src={author.profile_photo_path}
                                   alt="bg-pic"
                                 />
-                                <span className="link-din"><a href=""> <i className="bi bi-linkedin"></i></a></span>
+                                <span className="link-din"><a href={author.linkedin_url} target="_blank"> <i className="bi bi-linkedin"></i></a></span>
                               </div>
                               <div className="right">
                                <Link href={`/blog/category/${author.author_email}`}><a><span>{author.name}</span></a></Link>
@@ -238,9 +242,9 @@ function Post({ blogs, blogcat, authordetials, author }) {
                               </a>
                             </span>
                             <span className="cate">
-                              <a href="">
-                                <i className="bi bi-app"></i> {item1.category}
-                              </a>
+                            <Link href={`/blog/category/${item.category_slug}`}><a>
+                            <i className="bi bi-app"></i> {item.category}
+                          </a></Link>
                             </span>
                           </div>
                           <div className="b-card-info">
@@ -280,6 +284,7 @@ function Post({ blogs, blogcat, authordetials, author }) {
           ))}
       </section>
     </div>
+    
   );
 }
 export async function getServerSideProps(context) {

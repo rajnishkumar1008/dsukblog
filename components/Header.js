@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ScrollPopupModal from "./ScrollPopupModal";
+// import ScrollPopupModal from "./ScrollPopupModal";
 
 class Header extends Component {
 
@@ -880,7 +880,7 @@ return(
                   <ul>
                     <li>
                       <a
-                        href="https://blog.dynamicssquare.ca/"
+                        href="/blog/"
                         rel=""
                         target="_self"
                       >
@@ -1398,7 +1398,7 @@ return(
           </div>
         </div>
       </header>
-      <ScrollPopupModal />
+      {/* <ScrollPopupModal /> */}
     </>
     
     );

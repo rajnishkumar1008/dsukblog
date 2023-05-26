@@ -81,7 +81,7 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                     </h3>
                     <div className="blogs-info-list">
                       <span className="user">
-                        <a href={`/blog/author/${item.author_email}`}>
+                        <a href={`/blog/category/${item.author_email}`}>
                           <i className="bi bi-person-circle"></i>
                           {item.author}
                         </a>
