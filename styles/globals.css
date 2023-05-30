@@ -8969,7 +8969,10 @@ ul.checkmark li {
   padding: 10px;
 }
 .auter-cate{
-
+  position: sticky;
+  top: 7rem;
+  display: block;
+    overflow: hidden;
 }
 .auter-cate h3{
   margin-bottom: 30px;
