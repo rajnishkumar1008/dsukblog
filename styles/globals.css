@@ -8614,6 +8614,7 @@ ul.checkmark li {
   position: sticky;
     top: 7rem;
 }
+
 .page-link-read{}
 .page-link-read a{
   font-size: 16px;
@@ -8622,7 +8623,13 @@ ul.checkmark li {
 .blogs-extra-new{
   padding-top:40px
 }
-.blogs-ex-side-cate{}
+.blogs-ex-side-cate{
+  position: sticky;
+  top: 7rem;
+  display: block;
+    overflow: hidden;
+
+}
 .blogs-ex-side-cate h3{
   font-size: 18px;
   font-weight: 600;
@@ -8993,7 +9000,50 @@ ul.checkmark li {
 
 .auter-cate ul li a span{font-size: 14px;
   font-weight: 600;}
+  .author-dc{
+    padding-bottom: 80px;
+  }
+  .author-title {
+    margin-top: -30px !important;
+    display: block;
+    overflow: hidden;
+  }
+  .author-title h1{
+    font-size: 40px !important;
+    margin-bottom: 50px;
+    font-weight: 600;
+    color: #1d3557;
+  }
+.author-list-card{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  background: #f9f9f9;
+  transition:0.3s
+}
+.author-list-card a{
+  
+}
+.author-list-card a img{
+  display: block;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+}
+.author-list-card a span{
+  display: block;
+  font-size: 16px;
+  color: #1d3557;
+  font-weight: 500;
+}
+.author-list-card:hover{
+  box-shadow: 0 100px 80px rgba(22,61,151,.07), 0 41.7776px 33.4221px rgba(22,61,151,.05), 0 22.3363px 17.869px rgba(22,61,151,.042), 0 12.5216px 10.0172px rgba(22,61,151,.035), 0 6.6501px 5.32008px rgba(22,61,151,.028), 0 2.76726px 2.21381px rgba(22,61,151,.02);
+}
+.author-list-card:hover a{
 
+}
 
 
 @media (min-width: 1201px) and (max-width: 1400px){

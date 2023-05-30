@@ -310,3 +310,4 @@ export async function getServerSideProps(context) {
   return { props: { blogs, blogcat, authordetials, author } };
 }
 export default Post;
+

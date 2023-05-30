@@ -2,6 +2,7 @@ import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import BlogSubscriberForm from "../../../components/BlogSubscriberForm";
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
@@ -19,6 +20,8 @@ export async function getServerSideProps(context) {
 }
 
 function CategoryBlogs({ blogs, categoryblogs }) {
+  const router = useRouter();
+
   return (
     <div>
       <Head>
@@ -48,7 +51,14 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                         <a>Blog</a>
                       </Link>
                     </li>
-                    <li className="breadcrumb-item active"></li>
+                    <li className="breadcrumb-item">
+                      <Link href="/blog/category/">
+                        <a>Category</a>
+                      </Link>
+                    </li>
+                   
+                    <li className="breadcrumb-item active">{blogs[0]['category']}</li>
+              
                   </ol>
                 </nav>
               </div>
@@ -81,7 +91,7 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                     </h3>
                     <div className="blogs-info-list">
                       <span className="user">
-                        <a href="">
+                        <a href={`/blog/author/${item.author}`}>
                           <i className="bi bi-person-circle"></i>
                           {item.author}
                         </a>

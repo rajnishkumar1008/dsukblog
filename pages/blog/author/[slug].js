@@ -5,9 +5,11 @@ import BlogSubscriberForm from "../../../components/BlogSubscriberForm";
 
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
+ 
   const res = await fetch(
     process.env.BACKEND_URL + "/api/blog/category/" + slug
   );
+
   const blogs = await res.json();
   const authors = await fetch(
     "https://blognew.dynamicssquare.com/api/allauthor"
@@ -50,6 +52,11 @@ function Authors({ blogs, authorslist, blgsbyauthorslist }) {
                     <li className="breadcrumb-item">
                       <Link href="/blog/">
                         <a>Blog</a>
+                      </Link>
+                    </li>
+                    <li className="breadcrumb-item">
+                      <Link href="/blog/author">
+                        <a>Author</a>
                       </Link>
                     </li>
                     <li className="breadcrumb-item active">{blgsbyauthorslist[0]['author']}</li>

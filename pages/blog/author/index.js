@@ -5,20 +5,26 @@ import BlogSubscriberForm from "../../../components/BlogSubscriberForm";
 
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
+ 
   const res = await fetch(
     process.env.BACKEND_URL + "/api/blog/category/" + slug
   );
+
   const blogs = await res.json();
-
-  const categoryblog = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/category"
+  const authors = await fetch(
+    "https://blognew.dynamicssquare.com/api/allauthor"
   );
-  const categoryblogs = await categoryblog.json();
+  const authorslist = await authors.json();
 
-  return { props: { blogs, categoryblogs } };
+  const blgsbyauthors = await fetch(
+    "https://blognew.dynamicssquare.com/api/blog/author/"+slug
+  );
+  const blgsbyauthorslist = await blgsbyauthors.json();
+
+  return { props: { blogs, authorslist, blgsbyauthorslist } };
 }
 
-function CategoryBlogs({ blogs, categoryblogs }) {
+function AuthorsList({ blogs, authorslist, blgsbyauthorslist }) {
   return (
     <div>
       <Head>
@@ -48,138 +54,37 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                         <a>Blog</a>
                       </Link>
                     </li>
-                    <li className="breadcrumb-item active"></li>
+                    <li className="breadcrumb-item active">Author</li>
                   </ol>
                 </nav>
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-3">
-              <div className="blogs-ex-side-cate">
-                <h3>Explore by Topic</h3>
-                <ul>
-                  {categoryblogs &&
-                    categoryblogs.map((cateitem, i) => (
-                      <li>
-                        <Link href={`/blog/category/${cateitem.category_slug}`}>
-                          <a>{cateitem.category_name}</a>
-                        </Link>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-9">
-              {blogs &&
-                blogs.map((item, i) => (
-                  <div className="blogs-lates blogs-lates-rept">
-                    <h3>
-                      <Link href={`/blog/${item.title_slug}`}>
-                        <a>{item.title}</a>
-                      </Link>
-                    </h3>
-                    <div className="blogs-info-list">
-                      <span className="user">
-                        <a href={`/blog/category/${item.author_email}`}>
-                          <i className="bi bi-person-circle"></i>
-                          {item.author}
-                        </a>
-                      </span>
-                      <span className="date">
-                        <a>
-                          <i className="bi bi-calendar"></i>
-                          {item.publish_date}
-                        </a>
-                      </span>
-                      <span className="time">
-                        <a>
-                          <i className="bi bi-clock"></i>
-                          {item.read_time}
-                        </a>
-                      </span>
-                      <span className="cate">
-                        <a href={`/blog/category/${item.category_slug}`}>
-                          <i className="bi bi-app"></i>
-                          {item.category}
-                        </a>
-                      </span>
-                    </div>
-                    <div className="b-card-info">
-                    <p>{item.short_description}</p>
-                      <div className="page-link-read">
-                        <Link href={`/blog/${item.title_slug}`}>
-                          <a>
-                            Read More <span>{">"}</span>
-                          </a>
+          <div className="row author-dc">
+        
+         <div className="author-title">
+         <h1>Our Authors</h1>
+         </div>
+                {authorslist &&
+                    authorslist.map((authorsitem, i) => (
+                <div className="col-lg-3">
+                      <div className="author-list-card">
+                        <Link href={`/blog/author/${authorsitem.name}`}>
+                          <a><img src={authorsitem.profile_photo_path} alt={authorsitem.name} /> <span>{authorsitem.name}</span></a>
                         </Link>
                       </div>
-                    </div>
-                  </div>
-                ))}
-
-              {/* <div className="pagination-main">
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination">
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        {"<"}
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        1
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        2
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        ...
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        {">"}
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div> */}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bootom-blogs-sub">
-        <div className="container">
-          <div className="row justify-content-center row-bg">
-            <div className="col-lg-6">
-              <div className="form-subscriber-card">
-                <div className="sub-head">
-                  <h3>Join our newsletter</h3>
-                  <p>
-                    Engaging stories and exclusive data, designed for our best
-                    customers. We only send one issue each month, so we try to
-                    make it useful.
-                  </p>
+                   
                 </div>
-                <BlogSubscriberForm />
-              </div>
-            </div>
+                ))}
+         
+
+            
           </div>
         </div>
       </div>
+
     </div>
   );
 }
 
-export default CategoryBlogs;
+export default AuthorsList;
