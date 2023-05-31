@@ -6,17 +6,24 @@ import { useRouter } from 'next/router';
 
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
-  const res = await fetch(
-    process.env.BACKEND_URL + "/api/blog/category/" + slug
+  const res = await fetch(process.env.BACKEND_URL + "/api/blog/category/" + slug
   );
   const blogs = await res.json();
-
-  const categoryblog = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/category"
-  );
-  const categoryblogs = await categoryblog.json();
-
-  return { props: { blogs, categoryblogs } };
+  const categorybloglength = blogs.length;
+  console.log(categorybloglength);
+  if(categorybloglength >=1)
+  {
+    const categoryblog = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/category');
+    const categoryblogs = await categoryblog.json();
+  
+    return { props: { blogs, categoryblogs } };
+  }
+  else{
+    return{
+      notFound:true,
+     };
+  }
+  
 }
 
 function CategoryBlogs({ blogs, categoryblogs }) {

@@ -5,26 +5,27 @@ import BlogSubscriberForm from "../../../components/BlogSubscriberForm";
 
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
- 
-  const res = await fetch(
-    process.env.BACKEND_URL + "/api/blog/category/" + slug
-  );
-
-  const blogs = await res.json();
-  const authors = await fetch(
-    "https://blognew.dynamicssquare.com/api/allauthor"
-  );
+  const authors = await fetch(`${process.env.BACKEND_URL}`+'/api/allauthor');
   const authorslist = await authors.json();
 
-  const blgsbyauthors = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/author/"+slug
+  const blgsbyauthors = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/author/'+slug
   );
   const blgsbyauthorslist = await blgsbyauthors.json();
-
-  return { props: { blogs, authorslist, blgsbyauthorslist } };
+  const blogsauthorlength = blgsbyauthorslist.length;
+  if(blogsauthorlength>=1)
+  {
+    return { props: { authorslist, blgsbyauthorslist } };
+  }
+  else
+  {
+    return{
+      notFound:true,
+     };
+  }
+  
 }
 
-function Authors({ blogs, authorslist, blgsbyauthorslist }) {
+function Authors({authorslist, blgsbyauthorslist }) {
   return (
     <div>
       <Head>

@@ -290,24 +290,40 @@ function Post({ blogs, blogcat, authordetials, author }) {
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
   console.log(slug);
-  const res = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog_details/" + slug
-  );
+ 
+  const res = await fetch(`${process.env.BACKEND_URL}`+'/api/blog_details/'+slug);
   const blogs = await res.json();
+  const bloglength =blogs.length;
+  const allbloglength = blogs.length;
+  if(allbloglength>=1){
 
-  const category = blogs[0]["category_slug"];
-  const res1 = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/category/" + category
-  );
-  const blogcat = await res1.json();
-
-  const author = blogs[0]["author_email"];
-  const authorres = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/author/details/"+author
-  );
-  const authordetials = await authorres.json();
-
-  return { props: { blogs, blogcat, authordetials, author } };
+  }
+  else
+  {
+    return{
+      notFound:true
+    }
+  }
+  if(bloglength >=1)
+  {
+    const category = blogs[0]["category_slug"];
+    const res1 = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/category/'+category
+    );
+    const blogcat = await res1.json();
+  
+    const author = blogs[0]["author_email"];
+    const authorres = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/author/details/'+author
+    );
+    const authordetials = await authorres.json();
+  
+    return { props: { blogs, blogcat, authordetials, author } };
+  }
+  else{
+    return{
+      notFound:true,
+     };
+  }
+  
 }
 export default Post;
 
