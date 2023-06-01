@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 import BlogSubscriberForm from "../../../components/BlogSubscriberForm";
 
 export async function getServerSideProps(context) {
@@ -26,6 +27,7 @@ export async function getServerSideProps(context) {
 }
 
 function Authors({authorslist, blgsbyauthorslist }) {
+  const router = useRouter();
   return (
     <div>
       <Head>
@@ -73,7 +75,7 @@ function Authors({authorslist, blgsbyauthorslist }) {
                 <ul>
                   {authorslist &&
                     authorslist.map((authorsitem, i) => (
-                      <li>
+                      <li className={router.query.slug ==`${authorsitem.name}`? "active" :"Hello"}>
                         <Link href={`/blog/author/${authorsitem.name}`}>
                           <a><img src={authorsitem.profile_photo_path} alt={authorsitem.name} /> <span>{authorsitem.name}</span></a>
                         </Link>
