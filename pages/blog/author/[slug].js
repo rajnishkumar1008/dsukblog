@@ -75,7 +75,7 @@ function Authors({authorslist, blgsbyauthorslist }) {
                 <ul>
                   {authorslist &&
                     authorslist.map((authorsitem, i) => (
-                      <li className={router.query.slug ==`${authorsitem.name}`? "active" :"Hello"}>
+                      <li className={router.query.slug ==`${authorsitem.name.split(" ").join("-")}`? "active" :"Hello"}>
                         <Link href={`/blog/author/${authorsitem.name.split(" ").join("-")}`}>
                           <a><img src={authorsitem.profile_photo_path} alt={authorsitem.name} /> <span>{authorsitem.name}</span></a>
                         </Link>

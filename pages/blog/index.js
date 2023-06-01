@@ -61,7 +61,7 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                       </h1>
                       <div className="blogs-info-list">
                         <span className="user">
-                         <Link href={`/blog/author/${item.author}`}><a>
+                         <Link href={`/blog/author/${item.author.split(" ").join("-")}`}><a>
                             <i className="bi bi-person-circle"></i>{" "}
                             {item.author}
                           </a></Link>
@@ -130,10 +130,10 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                               </Link>
                             </h3>
                             <span className="user">
-                              <a href="">
-                                <i className="bi bi-person-circle"></i>{" "}
-                                {businessitem.author}
-                              </a>
+                            <Link href={`/blog/author/${businessitem.author.split(" ").join("-")}`}><a>
+                            <i className="bi bi-person-circle"></i>{" "}
+                            {businessitem.author}
+                          </a></Link>
                             </span>
                             <span className="date">
                               <a>
@@ -175,10 +175,10 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                       </h2>
                       <div className="blogs-info-list">
                         <span className="user">
-                          <a href="">
+                        <Link href={`/blog/author/${item.author.split(" ").join("-")}`}><a>
                             <i className="bi bi-person-circle"></i>{" "}
                             {item.author}
-                          </a>
+                          </a></Link>
                         </span>
                         <span className="date">
                           <a>

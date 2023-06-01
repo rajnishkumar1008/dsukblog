@@ -1021,7 +1021,7 @@ section {
   }
 }
 .btn-custom-1 {
-  margin-top: 30p !importantx;
+  margin-top: 30px !important;
   padding: 0.6rem 1.3rem !important;
   border-radius: 5px !important;
   color: #fff !important;
@@ -8641,7 +8641,12 @@ ul.checkmark li {
   padding:0;
   list-style:none
 }
-.blogs-ex-side-cate ul li{}
+.blogs-ex-side-cate ul li.active a
+{
+  background-color:var(--color-blue);
+  color:#fff !important;
+  border:1px solid var(--color-blue) !important
+}
 .blogs-ex-side-cate ul li a{
   display: inline-block;
     border: 1px solid;
@@ -8993,6 +8998,16 @@ ul.checkmark li {
     border: 1px solid #ddd;
     border-radius: 5px;
     color: #1d3557;
+}
+.auter-cate ul li.active a,.auter-cate ul li  a:hover{
+  border-color:#1d3557; 
+  background: #1d3557;
+  color:#fff;
+}
+.auter-cate ul li.active a img,.auter-cate ul li a:hover img{
+  border:2px solid #fff;
+  padding:2px;
+
 }
 .auter-cate ul li a img{ 
   width: 40px;

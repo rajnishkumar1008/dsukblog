@@ -94,7 +94,7 @@ function Post({ blogs, blogcat, authordetials, author }) {
                         <div className="blogs-info-list">
                           <div className="left-list">
                             <span className="user">
-                              <Link href={`/blog/author/${item.author}`}>{item.author}</Link>
+                              <Link href={`/blog/author/${item.author.split(" ").join("-")}`}>{item.author}</Link>
                             </span>
                             <span className="date">
                               <a>
@@ -224,10 +224,10 @@ function Post({ blogs, blogcat, authordetials, author }) {
                           </h3>
                           <div className="blogs-info-list">
                             <span className="user">
-                              <a href="">
-                                <i className="bi bi-person-circle"></i>{" "}
-                                {item1.author}
-                              </a>
+                            <Link href={`/blog/author/${item.author.split(" ").join("-")}`}><a>
+                            <i className="bi bi-person-circle"></i>{" "}
+                            {item.author}
+                          </a></Link>
                             </span>
                             <span className="date">
                               <a>
@@ -312,7 +312,7 @@ export async function getServerSideProps(context) {
     const blogcat = await res1.json();
   
     const author = blogs[0]["author_email"];
-    const authorres = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/author/details/'+author
+    const authorres = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/author/details/'+author.split("-").join(" ")
     );
     const authordetials = await authorres.json();
   

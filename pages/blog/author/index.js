@@ -69,7 +69,7 @@ function AuthorsList({ blogs, authorslist, blgsbyauthorslist }) {
                     authorslist.map((authorsitem, i) => (
                 <div className="col-lg-3">
                       <div className="author-list-card">
-                        <Link href={`/blog/author/${authorsitem.name}`}>
+                        <Link href={`/blog/author/${authorsitem.name.split(" ").join("-")}`}>
                           <a><img src={authorsitem.profile_photo_path} alt={authorsitem.name} /> <span>{authorsitem.name}</span></a>
                         </Link>
                       </div>
