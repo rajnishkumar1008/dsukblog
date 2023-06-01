@@ -8878,7 +8878,14 @@ ul.checkmark li {
   color: #273266;
   margin-bottom: 30px;
 }
-.blogs-content h2{}
+.blogs-content h2{
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 1.25;
+  color: #1d3557;
+  letter-spacing: 0.05px;
+  margin-bottom: 30px;
+}
 .blogs-content h3{
   font-size: 40px;
   font-weight: bold;

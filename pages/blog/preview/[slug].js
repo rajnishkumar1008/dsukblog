@@ -12,11 +12,6 @@ import {
 
 
 function BlogPreview({ blogs }) {
-   
-  const structuredData = JSON.stringify(blogs); // Convert the meta_image data to JSON string
-
-
-  
   
   return (
     
@@ -230,7 +225,6 @@ function BlogPreview({ blogs }) {
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
   console.log(slug);
- 
   const res = await fetch(`${process.env.BACKEND_URL}`+'/api/blog_details/'+slug);
   const blogs = await res.json();
   const bloglength =blogs.length;

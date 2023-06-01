@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Script from "next/script";
 import parse from "html-react-parser";
+import { useRouter } from 'next/router';
 import BlogSubscriberForm from "../../components/BlogSubscriberForm";
 import { ShareSocial } from "react-share-social";
 import {
@@ -14,11 +15,7 @@ import {
 
 function Post({ blogs, blogcat, authordetials, author }) {
   console.log(author)
-  const structuredData = JSON.stringify(blogs); // Convert the meta_image data to JSON string
-
-
-  
-  
+  const router = useRouter();
   return (
     
     <div>
@@ -195,7 +192,7 @@ function Post({ blogs, blogcat, authordetials, author }) {
                                 <span className="link-din"><a href={author.linkedin_url} target="_blank"> <i className="bi bi-linkedin"></i></a></span>
                               </div>
                               <div className="right">
-                               <Link href={`/blog/category/${author.author_email}`}><a><span>{author.name}</span></a></Link>
+                               <Link href={`/blog/author/${author.name.split(" ").join("-")}`}><a><span>{author.name}</span></a></Link>
                                <p>{author.about}</p>
                               </div>
                             </div>
@@ -213,9 +210,13 @@ function Post({ blogs, blogcat, authordetials, author }) {
                 </div>
 
                 <div className="row pd-90">
+                  
                   {blogcat &&
-                    blogcat.map((item1, i) => (
-                      <div className="col-lg-6" key={i}>
+                    blogcat.map((item1, i) => {
+                      if(router.query.slug !=item1.title_slug)
+                      {
+                        return <div className="col-lg-6" key={i}>
+                         
                         <div className="blogs-lates blogs-lates-repet">
                           <h3>
                             <Link href={`/blog/${item1.title_slug}`}>
@@ -224,9 +225,9 @@ function Post({ blogs, blogcat, authordetials, author }) {
                           </h3>
                           <div className="blogs-info-list">
                             <span className="user">
-                            <Link href={`/blog/author/${item.author.split(" ").join("-")}`}><a>
+                            <Link href={`/blog/author/${item1.author.split(" ").join("-")}`}><a>
                             <i className="bi bi-person-circle"></i>{" "}
-                            {item.author}
+                            {item1.author}
                           </a></Link>
                             </span>
                             <span className="date">
@@ -257,7 +258,9 @@ function Post({ blogs, blogcat, authordetials, author }) {
                           </div>
                         </div>
                       </div>
-                    ))}
+                      }
+                      
+                     })}
                 </div>
               </div>
 
@@ -294,21 +297,10 @@ export async function getServerSideProps(context) {
   const res = await fetch(`${process.env.BACKEND_URL}`+'/api/blog_details/'+slug);
   const blogs = await res.json();
   const bloglength =blogs.length;
-  const allbloglength = blogs.length;
-  if(allbloglength>=1){
-
-  }
-  else
-  {
-    return{
-      notFound:true
-    }
-  }
   if(bloglength >=1)
   {
     const category = blogs[0]["category_slug"];
-    const res1 = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/category/'+category
-    );
+    const res1 = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/category/'+category);
     const blogcat = await res1.json();
   
     const author = blogs[0]["author_email"];
