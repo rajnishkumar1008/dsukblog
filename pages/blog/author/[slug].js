@@ -9,7 +9,7 @@ export async function getServerSideProps(context) {
   const authors = await fetch(`${process.env.BACKEND_URL}`+'/api/allauthor');
   const authorslist = await authors.json();
 
-  const blgsbyauthors = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/author/'+slug
+  const blgsbyauthors = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/author/'+slug.split("-").join(" ")
   );
   const blgsbyauthorslist = await blgsbyauthors.json();
   const blogsauthorlength = blgsbyauthorslist.length;
@@ -76,7 +76,7 @@ function Authors({authorslist, blgsbyauthorslist }) {
                   {authorslist &&
                     authorslist.map((authorsitem, i) => (
                       <li className={router.query.slug ==`${authorsitem.name}`? "active" :"Hello"}>
-                        <Link href={`/blog/author/${authorsitem.name}`}>
+                        <Link href={`/blog/author/${authorsitem.name.split(" ").join("-")}`}>
                           <a><img src={authorsitem.profile_photo_path} alt={authorsitem.name} /> <span>{authorsitem.name}</span></a>
                         </Link>
                       </li>
