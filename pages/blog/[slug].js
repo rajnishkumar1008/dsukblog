@@ -150,6 +150,18 @@ function Post({ blogs, blogcat, authordetials, author }) {
                         <div className="blogs-content-inner">
                           {parse(item.description)}
                         </div>
+                        <div><em>Tags</em>:
+                        
+                        <>
+                          {item.meta_tags.split(',').map((item2,i) => (
+                                   
+                                   <a href={item2}><span>{item2.charAt(0).toUpperCase() + item2.slice(1)}</span></a>
+
+                          ))}
+                          
+
+                        </>
+                           </div>
                         <div className="sociallist sociallist-bott">
                           <FacebookShareButton
                             url={`https://dsukblog.vercel.app/blog/${item.title_slug}`}

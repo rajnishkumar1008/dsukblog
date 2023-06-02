@@ -8853,7 +8853,7 @@ ul.checkmark li {
 }
 .blogs-lates.blogs-lates-top-head h1{
   font-size: 48px !important;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 20px;
   color: #1d3557;
   display: block;
@@ -8879,16 +8879,16 @@ ul.checkmark li {
   margin-bottom: 30px;
 }
 .blogs-content h2{
-  font-size: 45px;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: 600;
   line-height: 1.25;
   color: #1d3557;
   letter-spacing: 0.05px;
   margin-bottom: 30px;
 }
 .blogs-content h3{
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: 600;
   line-height: 1.25;
   color: #1d3557;
   letter-spacing: 0.05px;
