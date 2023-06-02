@@ -225,7 +225,7 @@ function BlogPreview({ blogs }) {
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
   console.log(slug);
-  const res = await fetch('http://127.0.0.1:8000/api/blog_details/'+slug);
+  const res = await fetch('https://blognew.dynamicssquare.com/api/blog_details/'+slug);
   const blogs = await res.json();
   const bloglength =blogs.length;
   const allbloglength = blogs.length;
