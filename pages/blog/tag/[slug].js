@@ -1,26 +1,25 @@
 import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from 'next/router';
 import BlogSubscriberForm from "../../../components/BlogSubscriberForm";
+import { useRouter } from 'next/router';
 import Pagination from "../../../components/Pagination";
 import { paginate } from "../../../helpers/paginate";
 import { useState } from "react";
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
-  const authors = await fetch(`${process.env.BACKEND_URL}`+'/api/allauthor');
-  const authorslist = await authors.json();
-
-  const blgsbyauthors = await fetch(`${process.env.BACKEND_URL}`+'/api/blog/author/'+slug.split("-").join(" ")
+  console.log(slug)
+  const alltag = await fetch("https://blognew.dynamicssquare.com/api/all/blogs/tag");
+  const alltags = await alltag.json();
+  const res = await fetch(process.env.BACKEND_URL + "/api/blog/tagged/" + slug.split("-").join(" ")
   );
-  const blgsbyauthorslist = await blgsbyauthors.json();
-  const blogsauthorlength = blgsbyauthorslist.length;
-  if(blogsauthorlength>=1)
+  const blogs = await res.json();
+  const bloglength = blogs.length;
+  if(bloglength >=1)
   {
-    return { props: { authorslist, blgsbyauthorslist } };
+    return { props: { blogs,alltags} };
   }
-  else
-  {
+  else{
     return{
       notFound:true,
      };
@@ -28,7 +27,7 @@ export async function getServerSideProps(context) {
   
 }
 
-function Authors({authorslist, blgsbyauthorslist }) {
+function TagBlogs({ blogs,alltags}) {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 2;
@@ -36,7 +35,7 @@ function Authors({authorslist, blgsbyauthorslist }) {
   const onPageChange = (page) => {
     setCurrentPage(page);
   };
-  const paginatedPosts = paginate(blgsbyauthorslist, currentPage, pageSize);
+  const paginatedPosts = paginate(blogs, currentPage, pageSize);
   return (
     <div>
       <Head>
@@ -67,11 +66,13 @@ function Authors({authorslist, blgsbyauthorslist }) {
                       </Link>
                     </li>
                     <li className="breadcrumb-item">
-                      <Link href="/blog/author">
-                        <a>Author</a>
+                      <Link href="/blog/tag/">
+                        <a>Tag</a>
                       </Link>
                     </li>
-                    <li className="breadcrumb-item active">{blgsbyauthorslist[0]['author']}</li>
+                   
+                    <li className="breadcrumb-item active">{router.query.slug}</li>
+              
                   </ol>
                 </nav>
               </div>
@@ -79,24 +80,32 @@ function Authors({authorslist, blgsbyauthorslist }) {
           </div>
           <div className="row">
             <div className="col-lg-3">
-              <div className="auter-cate">
-                <h3>Our Authors</h3>
+              <div className="blogs-ex-side-cate">
+                <h3>Explore by Tag</h3>
                 <ul>
-                  {authorslist &&
-                    authorslist.map((authorsitem, i) => (
-                      <li className={router.query.slug ==`${authorsitem.name.split(" ").join("-")}`? "active" :"Hello"}>
-                        <Link href={`/blog/author/${authorsitem.name.split(" ").join("-")}`}>
-                          <a><img src={authorsitem.profile_photo_path} alt={authorsitem.name} /> <span>{authorsitem.name}</span></a>
-                        </Link>
-                      </li>
-                    ))}
+                {alltags && alltags.map((item2,i) => (
+
+                           <>
+                            {item2.meta_tags?.split(',').map((item3,i) => {
+                            if(router.query.slug == router.query.slug)
+                            {
+                               return  <li key={i}>
+                                
+                                <Link href={`/blog/tag/${item3.split(" ").join("-")}`} key={i}><a><span className="blog-tagged">{item3.charAt(0).toUpperCase() + item3.slice(1)}</span></a></Link>
+                                </li>
+                            }
+                          
+                           })}
+                           </>
+
+                          ))}
                 </ul>
               </div>
             </div>
             <div className="col-lg-9">
               {
                 paginatedPosts.map((item, i) => (
-                  <div className="blogs-lates blogs-lates-rept">
+                  <div className="blogs-lates blogs-lates-rept" key={i}>
                     <h3>
                       <Link href={`/blog/${item.title_slug}`}>
                         <a>{item.title}</a>
@@ -104,7 +113,7 @@ function Authors({authorslist, blgsbyauthorslist }) {
                     </h3>
                     <div className="blogs-info-list">
                       <span className="user">
-                        <a href="">
+                        <a href={`/blog/author/${item.author.split(" ").join("-")}`}>
                           <i className="bi bi-person-circle"></i>
                           {item.author}
                         </a>
@@ -139,8 +148,9 @@ function Authors({authorslist, blgsbyauthorslist }) {
                     </div>
                   </div>
                 ))}
-                 <Pagination
-                          items={blgsbyauthorslist.length}  
+                   
+                   <Pagination
+                          items={blogs.length}  
                            currentPage={currentPage}  
                           pageSize={pageSize}
                           onPageChange={onPageChange}
@@ -209,4 +219,4 @@ function Authors({authorslist, blgsbyauthorslist }) {
   );
 }
 
-export default Authors;
+export default TagBlogs;

@@ -14,7 +14,6 @@ import {
 
 
 function Post({ blogs, blogcat, authordetials, author }) {
-  console.log(author)
   const router = useRouter();
   return (
     
@@ -151,11 +150,9 @@ function Post({ blogs, blogcat, authordetials, author }) {
                           {parse(item.description)}
                         </div>
                         <div><em>Tags</em>:
-                        
                         <>
-                          {item.meta_tags.split(',').map((item2,i) => (
-                                   
-                                   <a href={item2}><span>{item2.charAt(0).toUpperCase() + item2.slice(1)}</span></a>
+                          {item.meta_tags?.split(',').map((item2,i) => (
+                          <Link href={`/blog/tag/${item2.split(" ").join("-")}`} key={i}><a><span className="blog-tagged">{item2.charAt(0).toUpperCase() + item2.slice(1)}</span></a></Link>
 
                           ))}
                           

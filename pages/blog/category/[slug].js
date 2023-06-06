@@ -3,7 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import BlogSubscriberForm from "../../../components/BlogSubscriberForm";
 import { useRouter } from 'next/router';
-
+import Pagination from "../../../components/Pagination";
+import { paginate } from "../../../helpers/paginate";
+import { useState } from "react";
 export async function getServerSideProps(context) {
   let slug = context.query.slug;
   const res = await fetch(process.env.BACKEND_URL + "/api/blog/category/" + slug
@@ -28,7 +30,13 @@ export async function getServerSideProps(context) {
 
 function CategoryBlogs({ blogs, categoryblogs }) {
   const router = useRouter();
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 2;
+ 
+  const onPageChange = (page) => {
+    setCurrentPage(page);
+  };
+  const paginatedPosts = paginate(blogs, currentPage, pageSize);
   return (
     <div>
       <Head>
@@ -88,8 +96,8 @@ function CategoryBlogs({ blogs, categoryblogs }) {
               </div>
             </div>
             <div className="col-lg-9">
-              {blogs &&
-                blogs.map((item, i) => (
+              { 
+                paginatedPosts.map((item, i) => (
                   <div className="blogs-lates blogs-lates-rept">
                     <h3>
                       <Link href={`/blog/${item.title_slug}`}>
@@ -133,43 +141,13 @@ function CategoryBlogs({ blogs, categoryblogs }) {
                     </div>
                   </div>
                 ))}
-
-              <div className="pagination-main">
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination">
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        {"<"}
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        1
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        2
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        ...
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        {">"}
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+                    <Pagination
+                          items={blogs.length}  
+                           currentPage={currentPage}  
+                          pageSize={pageSize}
+                          onPageChange={onPageChange}
+                          />
+               
             </div>
           </div>
         </div>

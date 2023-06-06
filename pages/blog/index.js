@@ -2,23 +2,24 @@ import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import BlogSubscriberForm from "../../components/BlogSubscriberForm";
-
+import styles from "../../styles/Home.module.css";
+import Pagination from "../../components/Pagination";
+import { paginate } from "../../helpers/paginate";
+import { useState } from "react";
+ 
 export async function getServerSideProps() {
-  const res = await fetch(process.env.BACKEND_URL + "/api/allblog");
+  const res = await fetch(process.env.BACKEND_URL+"/api/allblog");
   const blogs = await res.json();
 
-  const business = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/category/business-central"
+  const business = await fetch(process.env.BACKEND_URL+"/api/blog/category/business-central"
   );
   const businesscentral = await business.json();
 
-  const categoryblog = await fetch(
-    "https://blognew.dynamicssquare.com/api/blog/category"
+  const categoryblog = await fetch(process.env.BACKEND_URL+"/api/blog/category"
   );
   const categoryblogs = await categoryblog.json();
 
-  const blograndom = await fetch(
-    "https://blognew.dynamicssquare.com/api/random/allblog"
+  const blograndom = await fetch("https://blognew.dynamicssquare.com/api/random/allblog?page=1&per_page=2"
   );
   const blograndomblogs = await blograndom.json();
 
@@ -31,6 +32,13 @@ export async function getServerSideProps() {
 }
 
 function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
+  const [currentPage, setCurrentPage] = useState(1);
+ const pageSize = 5;
+
+ const onPageChange = (page) => {
+   setCurrentPage(page);
+ };
+ const paginatedPosts = paginate(blograndomblogs, currentPage, pageSize);
   return (
     <div>
       <Head>
@@ -235,7 +243,7 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                       <ul>
                         {categoryblogs &&
                           categoryblogs.map((cateitem, i) => (
-                            <li>
+                            <li key={i}>
                               <Link
                                 href={`/blog/category/${cateitem.category_slug}`}
                               >
@@ -247,9 +255,8 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                     </div>
                   </div>
                   <div className="col-lg-9">
-                    {blograndomblogs &&
-                      blograndomblogs.map((randomitem, i) => (
-                        <div className="blogs-lates blogs-lates-rept">
+                    {paginatedPosts.map((randomitem, i) => (
+                        <div className="blogs-lates blogs-lates-rept" key={i}>
                           <h3>
                           <Link href={`/blog/${randomitem.title_slug}`}>
                           <a>{randomitem.title}</a>
@@ -289,7 +296,12 @@ function Blogshome({ blogs, businesscentral, categoryblogs, blograndomblogs }) {
                           </div>
                         </div>
                       ))}
-
+                         <Pagination
+                          items={blograndomblogs.length}  
+                           currentPage={currentPage}  
+                          pageSize={pageSize}
+                          onPageChange={onPageChange}
+                          />
                     {/* <div className="pagination-main">
                       <nav aria-label="Page navigation example">
                         <ul className="pagination">
